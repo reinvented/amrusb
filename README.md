@@ -2,6 +2,8 @@
 
 This Python script will log readings received from a [Grid Insight AMRUSB-1 ](http://www.gridinsight.com/products/amrusb-1/)to [Amazon AWS Dynamo DB](http://aws.amazon.com/dynamodb/).
 
+I have no affiliation with Grid Insight; this is code I created for my own purposes.
+
 ## Dependencies
 
 	sudo apt-get install python-setuptools
@@ -55,6 +57,8 @@ Where you should see something like this:
 	2014-09-07 19:49:04,684 - DaemonLog - INFO - Connected to Amazon Dynamo DB
 	2014-09-07 19:49:36,408 - DaemonLog - INFO - $UMSCM,24543136,7,1764501*6E
 	2014-09-07 19:50:00,033 - DaemonLog - INFO - $UMSCM,26080514,8,31849*6A
+
+For any SCM line -- those starting with **$UMSCM** -- you should see data in the Amazon Dynamo DB table you created.
 
 # Launching on Boot
 
