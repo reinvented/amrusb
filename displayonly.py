@@ -6,8 +6,6 @@ import time
 import sys
 
 from time import strftime
-import boto
-from boto.dynamodb2.table import Table
 
 class App():
 
@@ -22,8 +20,6 @@ class App():
     def run(self):
         logger.info('Starting amrusb daemon')
         logger.info('Opening device ' + self.device)
-        logger.info('Connected to Amazon Dynamo DB')
-        readings = Table('readings')
         ser = serial.Serial(self.device)
         while True:
             try:
@@ -33,14 +29,6 @@ class App():
                 logger.error(sys.exc_info()[0])
             else:
                 logger.info(line)
-                amrvalues = line.split(',')
-                if (amrvalues[0] == '$UMSCM'):
-                    readingvalue = amrvalues[3].split('*');
-                    try:
-                        readings.put_item(data={'serialnumber': int(amrvalues[1]), 'datestamp': int(time.time()), 'reading': int(readingvalue[0]), 'type': int(amrvalues[2])})
-                    except:
-                        logger.error('Could not push data to AWS Dynamo DB');
-                        logger.error(sys.exc_info()[0])
 
 app = App()
 logger = logging.getLogger('DaemonLog')
