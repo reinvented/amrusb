@@ -12,8 +12,6 @@ class App():
         self.device = '/dev/ttyACM0'
 
     def run(self):
-        logger.info('Starting amrusb daemon')
-        logger.info('Opening device ' + self.device)
         ser = serial.Serial(self.device)
         while True:
             try:
